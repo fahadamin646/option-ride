@@ -20,7 +20,7 @@ const upload = multer({ storage });
 // Set up the file upload route
 app.post('/upload', upload.single('file'), (req, res) => {
     // Return a response with the link to the uploaded file
-    res.send({ fileUrl: `http://localhost:3000/uploads/${req.file.originalname}` });
+    res.send({ fileUrl: `/uploads/${req.file.originalname}` });
 });
 
 app.get('/getResponse', (req, res) => {

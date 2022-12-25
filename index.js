@@ -24,7 +24,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
 });
 
 app.get('/getResponse', (req, res) => {
-    res.send({ message: req.baseUrl + "/uploads/file_example_MP3_700KB.mp3" });
+    res.send({ message: `${req.baseUrl}/uploads/file_example_MP3_700KB.mp3` });
 })
 app.listen(3000, () => {
     console.log('Server listening on port 3000');

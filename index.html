@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>Sample App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#getRes").click(function () {
+          $.ajax({
+            url: "http://localhost:3000/getResponse",
+            method: "get",
+            type: "get",
+            success: function (res) {
+              console.log(res);
+            },
+            error: function (err) {
+              console.log(err);
+            },
+          });
+        });
+        const fileInput = $("#file-input");
+
+        // Bind a change event handler to the file input element
+        fileInput.on("change", function () {
+          // Get the selected file
+          const file = fileInput[0].files[0];
+
+          // Post the file to the API
+          postMp3(file);
+        });
+      });
+      function postMp3(file) {
+        // Set up the POST request to the API endpoint
+        $.ajax({
+          url: "http://localhost:3000/upload",
+          type: "POST",
+          data: file,
+          contentType: "multipart/form-data",
+          processData: false,
+        })
+          .done(function (response) {
+            console.log(response);
+          })
+          .fail(function (error) {
+            console.error(error);
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <button id="getRes">Get response</button>
+    <input type="file" id="file-input" />
+  </body>
+</html>

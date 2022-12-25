@@ -9,7 +9,7 @@ app.use(cors())
 // Set up Multer to handle file uploads and save them to a designated folder
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/');
+        cb(null, '/');
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname);
@@ -20,7 +20,7 @@ const upload = multer({ storage });
 // Set up the file upload route
 app.post('/upload', upload.single('file'), (req, res) => {
     // Return a response with the link to the uploaded file
-    res.send({ fileUrl: `/uploads/${req.file.originalname}` });
+    res.send({ fileUrl: `/${req.file.originalname}` });
 });
 
 app.get('/getResponse', (req, res) => {
